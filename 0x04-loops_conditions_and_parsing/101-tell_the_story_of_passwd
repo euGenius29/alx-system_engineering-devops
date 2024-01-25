@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Displays user information from /etc/passwd using while loop and IFS
+
+# Set the field separator to ":"
+IFS=":"
+
+# Open the /etc/passwd file for reading
+while read -r username _ uid gid comment home shell
+do
+    # Extract password field from user_info
+    password=$(getent passwd "$username" | cut -d: -f2)
+
+    # Display user information in a single line
+    echo "The user $username is part of the $gid gang, lives in $home and rides $shell. $uid's place is protected by the passcode $password, more info about the user here: $comment"
+done < /etc/passwd
