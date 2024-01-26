@@ -5,10 +5,7 @@
 IFS=":"
 
 # Open the /etc/passwd file for reading
-while read -r username _ uid _ home _
+while read -r username _ uid _ home_dir _
 do
-    echo "Username: $username"
-    echo "User ID: $uid"
-    echo "Home Directory: $home"
-    echo "------------------------"
+    echo "$username:$uid:$home_dir"
 done < /etc/passwd
