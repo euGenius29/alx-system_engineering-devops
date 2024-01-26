@@ -4,9 +4,12 @@
 count=0
 while [ "$count" -lt 10 ]
 do
-    if [ "$count" -eq 8 ]
+    if [ "$count" -eq 3 ]
     then
-        echo -e "Best School\nHi"
+	    echo "bad luck"
+    elif [ "$count" -eq 7 ]
+    then
+        echo  "good luck"
     else
         echo "Best School"
     fi
