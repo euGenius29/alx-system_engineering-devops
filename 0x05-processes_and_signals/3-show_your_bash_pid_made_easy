@@ -3,6 +3,5 @@
 
 pgrep -f bash | while read -r pid
 do
-	process_name=$(tr -d '\0' < "/proc/$pid/cmdline")
 	echo "$pid bash"
 done
