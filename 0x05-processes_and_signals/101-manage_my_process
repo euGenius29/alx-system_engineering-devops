@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#Manages _manage_my_process_.
+
+SCRIPT="manage_my_process"
+
+PID="/var/run/my_process.pid"
+
+start()
+{
+	nohup "$SCRIPT" > /dev/null 2>&1 &
+	echo $! > "$PID"
+	echo "manage_my_process started"
+}
+
+stop()
+{
+	cat "PID" | xargs kill
+	echo "manage_my_process stopped"
+}
+
+restart()
+{
+	stop
+	start
+	echo "manage_my_process restarted"
+}
+
+case "$1" in 
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		restart
+		;;
+	*)
+
+		echo "Usage: $SCRIPT {start|stop|restart}"
+		exit 1
+esac
+
+exit 0
+
