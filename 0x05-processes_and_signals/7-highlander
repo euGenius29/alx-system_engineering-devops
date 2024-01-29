@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Prints 'I am invincible!!!' everytime a sigterm is received.
+
+sigterm_rec()
+{
+	echo "I am invincible!!!"
+}
+
+trap 'sigterm_rec' SIGTERM
+
+while :
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
