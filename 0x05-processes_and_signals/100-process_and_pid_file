@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#Creates the file /var/run/myscript.pid other various actions.
+
+
+sigterm_called()
+{
+        echo "I hate the kill command"
+        rm -f /var/run/myscript.pid
+        exit 0
+}
+
+sigint_called()
+{
+        echo "Y U no love me?!"
+}
+
+sigquit_called()
+{
+        rm -f /var/run/myscript.pid
+        exit 0
+}
+
+trap 'sigint_called' SIGINT
+trap 'sigterm_called' SIGTERM
+trap 'sigquit_called' SIGQUIT
+
+#Creates the file /var/run/myscript.pid containing its PID
+echo $$ > /var/run/myscript.pid
+
+#Displays to infinity and beyond indefinitely.
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
