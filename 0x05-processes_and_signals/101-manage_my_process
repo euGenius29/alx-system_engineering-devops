@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 #Manages _manage_my_process_.
 
-SCRIPT="manage_my_process"
+SCRIPT="./manage_my_process"
 
 PID="/var/run/my_process.pid"
 
 start()
 {
 	nohup "$SCRIPT" > /dev/null 2>&1 &
-	echo $! > "$PID"
+	echo $! > "$PID" 
 	echo "manage_my_process started"
 }
 
 stop()
 {
-	cat "PID" | xargs kill
+	kill $( cat "$PID" )
+	rm -f "$PID"
 	echo "manage_my_process stopped"
 }
 
