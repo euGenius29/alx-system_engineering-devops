@@ -14,14 +14,14 @@ start()
 
 stop()
 {
-	kill $( cat "$PID" )
+	kill "$( cat "$PID" )"
 	rm -f "$PID"
 	echo "manage_my_process stopped"
 }
 
 restart()
 {
-	kill $( cat "$PID" )
+	kill "$( cat "$PID" )"
         rm -f "$PID"
 	nohup "$SCRIPT" > /dev/null 2>&1 &
         echo $! > "$PID"
