@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Configures the /etc/hosts file on an Ubuntu server with some custom mods.
+
+cp /etc/hosts /tmp/hosts
+
+sed -i s/[[:digit:]].*localhost$/127.0.0.2\\tlocalhost/ /tmp/hosts
+
+grep "facebook.com" /tmp/hosts > /dev/null
+
+# add an entry for "facebook.com" if it doesn't exist already
+if [[ $? == 1 ]]
+then
+	echo -e "\n8.8.8.8\tfacebook.com" >> /tmp/hosts
+else
+	# update it
+	sed -i s/[[:digit:]].*facebook.com$/8.8.8.8\\tfacebook.com/ /tmp/hosts
+fi
+
+# overwrite the current hosts file with the updated info
+cp /tmp/hosts /etc/hosts
+
+# clean up and exit
+rm /tmp/hosts
